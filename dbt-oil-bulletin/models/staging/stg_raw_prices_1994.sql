@@ -10,7 +10,6 @@ source as (
 
 final as (
 
-
     select
         bulletin_number,
         date,

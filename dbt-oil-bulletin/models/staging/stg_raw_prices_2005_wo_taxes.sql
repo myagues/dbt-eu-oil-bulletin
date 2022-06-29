@@ -2,7 +2,6 @@ with
 
 final as (
 
-
     select
         country_code,
         date,

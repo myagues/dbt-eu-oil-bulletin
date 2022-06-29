@@ -1,0 +1,217 @@
+version: 2
+
+models:
+  - name: prices_1994
+    description: ""
+    columns:
+      - name: date
+        description: ""
+        tests:
+          - not_null
+
+      - name: country_code
+        description: ""
+        tests:
+          - not_null
+
+      - name: exchange_rate
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: euro_super_wo_taxes
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: euro_super_with_taxes
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: euro_super_vat
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: euro_super_excise
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: diesel_wo_taxes
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: diesel_with_taxes
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: diesel_vat
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: diesel_excise
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: heating_gasoil_wo_taxes
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: heating_gasoil_with_taxes
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: heating_gasoil_vat
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: heating_gasoil_excise
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: fueloil_sulfur_lt_1_wo_taxes
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: fueloil_sulfur_lt_1_with_taxes
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: fueloil_sulfur_lt_1_vat
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: fueloil_sulfur_lt_1_excise
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: fueloil_sulfur_ht_1_wo_taxes
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: fueloil_sulfur_ht_1_with_taxes
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: fueloil_sulfur_ht_1_vat
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: fueloil_sulfur_ht_1_excise
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: lpg_wo_taxes
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: lpg_with_taxes
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: lpg_vat
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+      - name: lpg_excise
+        description: ""
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: '>= 0 or null'
+
+  - name: prices_2005
+    description: ""
+    columns:
+      - name: date
+        description: ""
+        tests:
+          - not_null
+
+      - name: country_code
+        description: ""
+        tests:
+          - not_null
+
+      - name: exchange_rate
+        description: ""
+
+      - name: euro_super_with_taxes
+        description: ""
+
+      - name: diesel_with_taxes
+        description: ""
+
+      - name: heating_gasoil_with_taxes
+        description: ""
+
+      - name: fueloil_sulfur_lt_1_with_taxes
+        description: ""
+
+      - name: fueloil_sulfur_ht_1_with_taxes
+        description: ""
+
+      - name: lpg_with_taxes
+        description: ""
+
+      - name: euro_super_wo_taxes
+        description: ""
+
+      - name: diesel_wo_taxes
+        description: ""
+
+      - name: heating_gasoil_wo_taxes
+        description: ""
+
+      - name: fueloil_sulfur_lt_1_wo_taxes
+        description: ""
+
+      - name: fueloil_sulfur_ht_1_wo_taxes
+        description: ""
+
+      - name: lpg_wo_taxes
+        description: ""

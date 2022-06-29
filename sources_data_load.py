@@ -1,14 +1,16 @@
 import argparse
+import tempfile
 from pathlib import Path
-from typing import Optional, Union
+from typing import Optional, Union, IO
 
 import numpy as np
 import pandas as pd  # type: ignore
-from google.cloud import bigquery
+import requests
+from google.cloud import bigquery  # type: ignore
 
 
 def read_process_excel(
-    file_path: Union[Path, str],
+    file_path: Union[Path, IO[bytes]],
     sheet_name: str,
     ctr: Optional[str] = None,
     line_idx: Optional[int] = None,
@@ -88,7 +90,7 @@ def data_upload(
     client: bigquery.Client,
     dataset_ref: bigquery.DatasetReference,
     table: str,
-    data_path: Path,
+    data_path: Optional[str],
 ):
     """Uploads data from files to BigQuery.
     Args:
@@ -139,7 +141,10 @@ def data_upload(
             "price_date",
             "Euro_Price",
         ]
-        file_path = data_path / "country_and_years" / "1994_2005_extraction.xls"
+        assert (
+            data_path is not None
+        ), "--data_path cannot be None for table 'raw_prices_1994'"
+        file_path = Path(data_path) / "country_and_years" / "1994_2005_extraction.xls"
         df = pd.read_excel(file_path, usecols=columns, dtype=str)
 
         new_columns = [
@@ -199,22 +204,28 @@ def data_upload(
             ["Prices wo taxes", "Prices with taxes"], ["wo_taxes", "with_taxes"]
         )
 
-        for sheet, table_suffix in sheet_table:
-            df = []
-            # add country data
-            df.append(read_process_excel(file_url, f"{sheet}, per CTR"))
-            # add UK data
-            start_idx = 5 if sheet == "Prices with taxes" else 7
-            df.append(
-                read_process_excel(file_url, f"{sheet}, UK", "GB", start_idx, 791)
-            )
-            df = pd.concat(df)
-            df = df.rename(columns=renamed_columns)
-            df["date"] = (pd.to_datetime(df["date"])).dt.date
+        # procedure to download Excel file a single time instead of every loop
+        r = requests.get(file_url, stream=True)
+        with tempfile.TemporaryFile() as fp:
+            for chunk in r.iter_content(chunk_size=1024):
+                fp.write(chunk)
 
-            table_id = dataset_ref.table(f"{table}_{table_suffix}")
-            job = client.load_table_from_dataframe(df, table_id, job_config=job_config)
-            job.result()
+            for sheet, table_suffix in sheet_table:
+                df = []
+                # add country data
+                df.append(read_process_excel(fp, f"{sheet}, per CTR"))
+                # add UK data
+                start_idx = 5 if sheet == "Prices with taxes" else 7
+                df.append(read_process_excel(fp, f"{sheet}, UK", "GB", start_idx, 791))
+                df = pd.concat(df)
+                df = df.rename(columns=renamed_columns)
+                df["date"] = (pd.to_datetime(df["date"])).dt.date
+
+                table_id = dataset_ref.table(f"{table}_{table_suffix}")
+                job = client.load_table_from_dataframe(
+                    df, table_id, job_config=job_config
+                )
+                job.result()
 
     else:
         raise ValueError(f"Table {table} is not valid.")
@@ -239,6 +250,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--data_path",
         help="Path where Excel files are located.",
+        default=None,
         type=str,
     )
     parser.add_argument(
@@ -261,4 +273,4 @@ if __name__ == "__main__":
     dataset_ref = bigquery.DatasetReference(client.project, args.dataset)
 
     if args.table is not None:
-        data_upload(client, dataset_ref, args.table, Path(args.data_path))
+        data_upload(client, dataset_ref, args.table, args.data_path)

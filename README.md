@@ -10,7 +10,7 @@ This repository is my effort to refactor the available data in a more efficient 
 
 This repository uses [dbt](https://www.getdbt.com) with [BigQuery](https://cloud.google.com/bigquery), and you probably need basic familiarity with both tools and Python, but it is just a toy project that involves basic procedures and SQL primitives. If you are familiar with a different flavor of data warehouse, just set up the connection with the dbt profile and change the data upload script.
 
-Refer to the following [tutorial](https://cloud.google.com/resource-manager/docs/creating-managing-projects) to set up a project in Google Cloud
+Refer to the following [tutorial](https://cloud.google.com/resource-manager/docs/creating-managing-projects) to set up a project in Google Cloud.
 
 The project requires Python v3.9+, and my recommendation is to set up a virtual environment. For using Python with BigQuery you can follow the steps in the following [tutorial](https://codelabs.developers.google.com/codelabs/cloud-bigquery-python).
 
@@ -45,7 +45,9 @@ $ python sources_data_load.py --dataset=eu_oil_bulletin --table=raw_prices_2005
 
 ### Run dbt procedures
 
-Install packages:
+For BigQuery and dbt configuration refer to [this](https://docs.getdbt.com/reference/warehouse-profiles/bigquery-profile#overview-of-dbt-bigquery) page.
+
+Install packages with:
 
 ```
 $ cd dbt-oil-bulletin

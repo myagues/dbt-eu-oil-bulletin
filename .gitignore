@@ -1,0 +1,7 @@
+data/
+dbt_packages/
+logs/
+target/
+.ipynb_checkpoints
+.mypy_cache
+*.json

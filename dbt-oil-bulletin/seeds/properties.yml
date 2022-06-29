@@ -1,0 +1,10 @@
+version: 2
+
+seeds:
+  - name: country_codes
+    config:
+      column_types:
+        country_code: string
+        country_name: string
+        currency_code: string
+        euro_year: integer

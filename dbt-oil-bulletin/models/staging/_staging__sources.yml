@@ -1,0 +1,63 @@
+version: 2
+
+sources:
+  - name: raw_data
+    schema: eu_oil_bulletin
+    tables:
+      - name: raw_prices_1994
+        columns:
+          - name: bulletin_number
+          - name: country_code
+          - name: euro_super_wo_taxes
+          - name: euro_super_with_taxes
+          - name: euro_super_vat
+          - name: euro_super_excise
+          - name: diesel_wo_taxes
+          - name: diesel_with_taxes
+          - name: diesel_vat
+          - name: diesel_excise
+          - name: heating_gasoil_wo_taxes
+          - name: heating_gasoil_with_taxes
+          - name: heating_gasoil_vat
+          - name: heating_gasoil_excise
+          - name: fueloil_sulfur_lt_1_wo_taxes
+          - name: fueloil_sulfur_lt_1_with_taxes
+          - name: fueloil_sulfur_lt_1_vat
+          - name: fueloil_sulfur_lt_1_excise
+          - name: fueloil_sulfur_ht_1_wo_taxes
+          - name: fueloil_sulfur_ht_1_with_taxes
+          - name: fueloil_sulfur_ht_1_vat
+          - name: fueloil_sulfur_ht_1_excise
+          - name: lpg_wo_taxes
+          - name: lpg_with_taxes
+          - name: lpg_vat
+          - name: lpg_excise
+          - name: exchange_rate
+          - name: date
+          - name: price_in_euros
+
+      - name: raw_prices_2005_with_taxes
+        columns:
+          - name: date
+          - name: exchange_rate
+          - name: country_code
+          - name: euro_super
+          - name: diesel
+          - name: heating_gasoil
+          - name: fueloil_sulfur_lt_1
+          - name: fueloil_sulfur_ht_1
+          - name: lpg
+          - name: euro_super
+
+      - name: raw_prices_2005_wo_taxes
+        columns:
+          - name: date
+          - name: exchange_rate
+          - name: country_code
+          - name: euro_super
+          - name: diesel
+          - name: heating_gasoil
+          - name: fueloil_sulfur_lt_1
+          - name: fueloil_sulfur_ht_1
+          - name: lpg
+          - name: euro_super

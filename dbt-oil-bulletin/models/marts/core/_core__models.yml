@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: prices__long
+    description: "Weekly petroleum products prices in long format."
+    columns:
+      - name: date
+        description: ""
+        tests:
+          - not_null
+
+      - name: country_name
+        description: ""
+        tests:
+          - not_null
+
+      - name: country_code
+        description: ""
+        tests:
+          - not_null
+
+      - name: product_name
+        description: ""
+        tests:
+          - not_null
+
+
+      - name: price_units
+        description: ""
+        tests:
+          - not_null
+
+      - name: currency_code
+        description: ""
+        tests:
+          - not_null
+
+      - name: euro_exch_rate
+        description: ""
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: '>= 0'
+
+      - name: price
+        description: ""
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: '>= 0'
+
+      - name: taxes
+        description: ""
+        tests:
+          - not_null

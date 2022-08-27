@@ -1,0 +1,24 @@
+dbt_oil_bulletin:
+  target: dev
+  outputs:
+    dev:
+      dataset: eu_oil_bulletin
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+      location: EU
+      method: service-account
+      priority: interactive
+      project: "{{ env_var('GOOGLE_CLOUD_PROJECT') }}"
+      threads: 1
+      type: bigquery
+    prod:
+      dataset: eu_oil_bulletin
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      location: EU
+      method: oauth
+      priority: interactive
+      project: "{{ env_var('GOOGLE_CLOUD_PROJECT') }}"
+      threads: 1
+      type: bigquery

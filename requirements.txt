@@ -1,5 +1,6 @@
 dbt-bigquery==1.1.0
 google-cloud-bigquery==2.34.3
+numpy==1.26.*
 openpyxl==3.0.10
 pandas==1.4.2
 pyarrow==7.0.0
